@@ -94,6 +94,12 @@ services:
     ports:
       - "${EVENTS_PORT:-8082}:8082"
     networks: [backend]
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:8082/api/events/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
 
   proxy-service:
     build:
