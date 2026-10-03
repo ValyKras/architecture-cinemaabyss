@@ -1,0 +1,25 @@
+# Build context and VCS files
+.git
+.github
+.gitignore
+
+# Documentation and local tooling
+*.md
+Project_template.md
+README-*.md
+api-specification.yaml
+
+# Go artifacts
+**/bin
+**/pkg
+**/*.test
+**/*.out
+
+# Local configuration and secrets
+.env*
+!.env.example
+
+# Editor and OS files
+.DS_Store
+.vscode
+.idea
