@@ -1,31 +1,22 @@
-FROM golang:1.23-alpine AS builder
+# syntax=docker/dockerfile:1
+FROM golang:1.23-alpine AS build
 
-WORKDIR /app
+WORKDIR /src
+RUN apk add --no-cache ca-certificates
 
-# Copy go mod and sum files
-COPY go.mod ./
-
-# Download all dependencies
+COPY go.mod go.sum ./
 RUN go mod download
-
-# Copy the source code
 COPY . .
+RUN CGO_ENABLED=0 GOOS=linux go build -trimpath -ldflags="-s -w" -o /out/monolith .
 
-# Build the application
-RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o monolith .
-
-# Use a smaller image for the final application
-FROM alpine:latest  
-
-RUN apk --no-cache add ca-certificates
-
-WORKDIR /root/
-
-# Copy the binary from builder
-COPY --from=builder /app/monolith .
-
-# Expose the application port
+FROM alpine:3.20
+RUN apk add --no-cache ca-certificates \
+    && addgroup -S app \
+    && adduser -S -G app app
+WORKDIR /app
+COPY --from=build /out/monolith ./monolith
+USER app:app
 EXPOSE 8080
-
-# Command to run the executable
-CMD ["./monolith"]
+HEALTHCHECK --interval=10s --timeout=3s --start-period=10s --retries=5 \
+  CMD wget --quiet --tries=1 --spider http://127.0.0.1:8080/health || exit 1
+ENTRYPOINT ["/app/monolith"]
