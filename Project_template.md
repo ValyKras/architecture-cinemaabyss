@@ -280,6 +280,11 @@ cat .docker/config.json | base64
 
 #### Шаг 3
 Добавьте сюда скриншота вывода при вызове https://cinemaabyss.example.com/api/movies и  скриншот вывода event-service после вызова тестов.
+Применился порт http://127.0.0.1:8081/api/movies
+
+[Скрин1](https://allwebs.ru/image/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA-%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%C2%A0%E2%80%94-2026-10-04-%D0%B2%C2%A000.33.50.0cno70)
+[Скрин2](https://allwebs.ru/image/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA-%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%C2%A0%E2%80%94-2026-10-04-%D0%B2%C2%A000.37.17.0cnHPA)
+[Скрин3](https://allwebs.ru/image/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA-%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%C2%A0%E2%80%94-2026-10-04-%D0%B2%C2%A000.37.54.0cn2tf)
 
 
 # Задание 4
@@ -355,6 +360,9 @@ minikube tunnel
 Потом вызовите 
 https://cinemaabyss.example.com/api/movies
 и приложите скриншот развертывания helm и вывода https://cinemaabyss.example.com/api/movies
+
+[Скрин](https://allwebs.ru/image/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA-%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%C2%A0%E2%80%94-2026-10-04-%D0%B2%C2%A009.28.41.0cSXbj)
+Я подняла все поды, они в статусе Running. Сервисы работают (скриншот curl на NodePort). Логи обработки событий прилагаю. minikube tunnel не запускала, так как у меня docker desktop и macos 
 
 ## Удаляем все
 
