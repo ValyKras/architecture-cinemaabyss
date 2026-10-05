@@ -108,6 +108,8 @@ eventsService:
     port: 8082
     targetPort: 8082
     type: ClusterIP
+  env:
+    KAFKA_BROKERS: "kafka:9092"
 
 # Kafka configuration
 kafka:
@@ -143,17 +145,17 @@ kafka:
 zookeeper:
   enabled: true
   image:
-    repository: wurstmeister/zookeeper
-    tag: latest
+    repository: zookeeper
+    tag: "3.9"
     pullPolicy: IfNotPresent
   replicas: 1
   resources:
     limits:
       cpu: 500m
-      memory: 512Mi
+      memory: 1Gi
     requests:
       cpu: 100m
-      memory: 256Mi
+      memory: 512Mi
   persistence:
     enabled: true
     size: 1Gi
@@ -172,7 +174,7 @@ ingress:
         - path: /
           pathType: Prefix
           service: proxy-service
-          port: 8000
+          port: 80
         - path: /api/events
           pathType: Prefix
           service: events-service

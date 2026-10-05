@@ -72,9 +72,9 @@ spec:
         resources:
           {{- toYaml .Values.zookeeper.resources | nindent 10 }}
         env:
-        - name: ZOOKEEPER_CLIENT_PORT
+        - name: ZOO_CLIENT_PORT
           value: "2181"
-        - name: ZOOKEEPER_TICK_TIME
+        - name: ZOO_TICK_TIME
           value: "2000"
         volumeMounts:
         - name: zookeeper-data
